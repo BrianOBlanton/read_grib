@@ -1,13 +1,10 @@
 read_grib
 =========
 
-Grib Edition 1 reader for MATLAB
+read_grib is a WMO GRiB Edition 1 file reader for MATLAB
 
-read_grib r4 (10 March 2013)
-a WMO GRiB Edition 1 file reader for MATLAB
-
+Current Version: r4 (10 March 2013)
 CONTACT:brian_blanton@renci.org
-LAST MODIFIED: 16 Apr 2012
 
 NOTE RE: Grib2 files
 
