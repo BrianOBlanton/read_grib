@@ -9,9 +9,8 @@ Current Version: r4 (10 March 2013)
 
 read_grib does NOT read grib2 files, and there is no chance that it will. It is much easier to do one of two things:
 
-1) Use nctoolbox, available on GitHub. This is the simplest way.
-2)
-Convert grib2 to netCDF with wgrib2 and use MATLAB's netCDF interface to get into MATLAB.
+1. Use nctoolbox, available on GitHub. This is the simplest way.
+2. Convert grib2 to netCDF with wgrib2 and use MATLAB's netCDF interface to get into MATLAB.
 
 ## Usage:
 
