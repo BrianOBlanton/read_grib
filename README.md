@@ -25,50 +25,39 @@ Pull the repo to your local machine, into a directory called read_grib.  The fil
 There is 1 mex file, written in c, that needs to be compiled.   Fire up
 MATLAB, cd to the read_grib/private directory and type the following:
 
-    mex BDS_unpack_mex5.c
+    >> mex BDS_unpack_mex5.c
 
-All should go well, assuming you have a MATLAB-supported c compiler.  This 
-code is known to work on Linux, DEC-alpha, IBM, SGI, and MACs. The code is 
-standard, and should work on most other platforms.  Binaries are available 
-for some platforms, and are in the git repo.
+All should go well, assuming you have a [MATLAB-supported c compiler](http://www.mathworks.com/support/compilers/R2013b/index.html).  This code is known to work on Linux, DEC-alpha, IBM, SGI, and MACs. The code is standard, and should work on most other platforms.  Binaries are available for some platforms, and are in the git repo.
 
 ###Usage
 
-read_grib reads WMO international exchange GRiB formatted data files into MATLAB.
-It has various input modes, including extraction of individial GRiB records by record number, 
-extraction by parameter name (which is not unique), and generating an inventory of the GRiB 
-file contents.  It has been tested on the following standard model output files: AVN, ETA, RUC, 
-ECMWF, and WAM.  The default GRiB parameter table used is the NCEP Operational table.
+read_grib reads WMO international exchange GRiB formatted data files into MATLAB.  It has various input modes, including extraction of individial GRiB records by record number, extraction by parameter name (which is not unique), and generating an inventory of the GRiB file contents.  It has been tested on the following standard model output files: AVN, ETA, RUC, ECMWF, and WAM.  The default GRiB parameter table used is the NCEP Operational table.
 
 Calls to read_grib look like:
 
-    grib_struct=read_grib(gribname,irec,p1,v1,p2,v2,...);
+    >> grib_struct=read_grib(gribname,irec,p1,v1,p2,v2,...);
 
 For example:
 
-    grib_struct=read_grib(gribname,irec,'HeaderFlag',0,'ParamTable','ECMWF128');
+    >> grib_struct=read_grib(gribname,irec,'HeaderFlag',0,'ParamTable','ECMWF128');
 
 The first 2 arguments are required:
 
-1. <strong>gribname </strong>- filename containing GRiB records.
-2. <strong>irec</strong> - specifies which GRiB records to decode and return.
-  * If irec is a vector, it specifies which GRiB records to decode and return.
-  * If irec is a scalar, is specifies how far to read into, and decode, the GRiB file.
-  * If irec==-1, read_grib reads/decodes all records(default). 
-  * Irec can be a cell array of parameter names to extract.  
-  * Type read_grib('paramtable') for a list of parameter names. 
-  * Irec can also be the string 'inv{entory}', so that read_grib prints a GRiB contents
- list.
+    gribname - filename containing GRiB records.
+    irec - specifies which GRiB records to read.
+        If irec is a vector, it specifies which GRiB records to return.
+        If irec is a scalar, is specifies how far to read into the GRiB file.
+        If irec==-1, read_grib reads all records(default). 
+        Irec can be a CELL ARRAY of parameter names to extract.  
+        Type read_grib('paramtable') for a list of parameter names. 
+        Irec can also be the string 'inv{entory}', so that Read_grib prints a GRiB contents list.
 
-There are a few optional arguments that control header reporting, 
+There are a few optional arguments that control header reporting, data decoding, and which grib parameter table to use. 
 
-    HeaderFlag - (0|1) report only headers if==1 (default=1) no data 
-             structures are returned unless DataFlag==1.
-    DataFlag   - (0|1) return decoded BDS if==1 (default=1).  The data for 
-             the parameter is stored in the .fltarray field of the structure.
+    HeaderFlag - (0|1) report only headers if==1 (default=1) no data structures are returned unless DataFlag==1.
+    DataFlag   - (0|1) return decoded BDS if==1 (default=1).  The data for the parameter is stored in the .fltarray field of the structure.
     ScreenDiag - (0|1) control diagnostics to screen (default=1)
-    ParamTable - ('NCEPOPER'|'NCEPREAN'|'ECMWF128'|'ECMWF160'|'ECMWF140') selects the parameter 
-             table to use for matching kpds6 number to the correct parameter name. (default='NCEPOPER')
+    ParamTable - ('NCEPOPER'|'NCEPREAN'|'ECMWF128'|'ECMWF160'|'ECMWF140') selects the parameter table to use for matching kpds6 number to the correct parameter name. (default='NCEPOPER')
 
 A different parameter table can be specificed by creating a file in the same format at the .tab files in the read_grib directory, and using the ParamTable option with the file's name. 
 

@@ -75,7 +75,8 @@ function grib_struct=read_grib(gribname,irec,varargin)
 
 
 global rgversion rgversiondate ParamTable
-ParamTable='NCEPOPER';
+%ParamTable='NCEPOPER';
+ParamTable='gribtab_GLDAS_NOAH_sorted';
 rgversion='r4';
 rgversiondate=datenum(2012,4,16);
 if nargin==0,gribhelp('mainhelp');return,end
